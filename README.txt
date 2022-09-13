@@ -1,4 +1,4 @@
-=== PublishingPass ===
+=== Publishing Urlaubs Plan ===
 
 Contact: https://julianmuslia.com
 Tags: Calendar, planner, PublishingUrlaubs, publishing-group
