@@ -79,7 +79,7 @@ $days_off = array_sum($daysOff); // Sum all elements of the array to give us the
 
     <br>
         <h2 class="text-center" style="font-family: 'Roboto', sans-serif;"><span style="color:#DE0A2B">Publishing Group</span> Urlaubs Plan</h2>
-        <h5 class="text-center">Herzlich willkommen <?php echo $current_user->display_name; ?> ! Sie haben bis jetzt <b style="color:#DE0A2B"><?php echo $days_off; ?></b> Tage frei genommen</h5>
+        <h4 class="text-center">Herzlich willkommen, <?php echo $current_user->display_name; ?> !</h4> <h5 class="text-center"> Sie haben bis jetzt <b style="color:#DE0A2B"><?php echo $days_off; ?>/28</b> Tage frei genommen.</h5>
     <br>
 
     <table id="example1" class="table table-bordered table-hover" style="margin-right:-10px">
