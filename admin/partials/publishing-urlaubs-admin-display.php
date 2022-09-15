@@ -28,7 +28,39 @@ function publishingUrlaubs (){
 
     require_once 'delete_event.php';
     delete_event();
-    ?>
+
+    $current_user = wp_get_current_user(); // Gets current logged in user
+
+
+    $items = array(); // Array to get all events and gets filled with FOREACH loop under !
+    foreach ($events as $e)
+    {   
+      if ( $e->event_name == $current_user->display_name ){
+      $items[] = $e;
+      }
+    }
+
+    // Displays this message for the user that does not have any days off !
+if ( count($items) == 0 )
+echo '<div class="alert alert-warning text-center" role="alert"> Hi, ' . $current_user->display_name . '! You haven\'t added any vacations ! </div>' ;
+
+$length = count($items); // Gets Array Length 
+
+$daysOff = []; // Array that stores the total number of days that are marked as Vacation days. 
+
+// the FOR loop gets the Starting and Ending date of the event, makes the difference and stores it to the above Array. 
+for ($i=0; $i<$length; $i++){  
+  $starting_date = new DateTime($items[$i]->event_start_date);
+  $ending_date = new DateTime($items[$i]->event_end_date);
+  $difference = date_diff($starting_date, $ending_date);
+  $intdiff = intval ($difference->format("%d"));
+
+  array_push($daysOff, $intdiff); 
+}
+
+$days_off = array_sum($daysOff); // Sum all elements of the array to give us the total number of days Off ! 
+    
+?>
 
 
 <style>
@@ -47,7 +79,7 @@ function publishingUrlaubs (){
 
     <br>
         <h2 class="text-center" style="font-family: 'Roboto', sans-serif;"><span style="color:#DE0A2B">Publishing Group</span> Urlaubs Plan</h2>
-        <h5 class="text-center">Herzlich willkommen <?php $current_user = wp_get_current_user(); echo $current_user->display_name; ?></h5>
+        <h5 class="text-center">Herzlich willkommen <?php echo $current_user->display_name; ?> ! Sie haben bis jetzt <b style="color:#DE0A2B"><?php echo $days_off; ?></b> Tage frei genommen</h5>
     <br>
 
     <table id="example1" class="table table-bordered table-hover" style="margin-right:-10px">
@@ -166,4 +198,3 @@ function publishingUrlaubs (){
 
 <?php
 }
-
