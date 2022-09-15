@@ -97,7 +97,7 @@ $days_off = array_sum($daysOff); // Sum all elements of the array to give us the
     var calendar = new FullCalendar.Calendar(calendarEl, {
         locale: initialLocaleCode,
         defaultView: 'month',
-         
+      weekends:false,   // if True shows the Saturday and Sunday
       navLinks: false, // can click day/week names to navigate views
       selectable: true,
       selectMirror: true,
@@ -168,25 +168,9 @@ $days_off = array_sum($daysOff); // Sum all elements of the array to give us the
         $('#edit_urlaub #edit_event_start_date').val(startDate.toISOString().split('T')[0]);
         $('#edit_urlaub #edit_event_end_date').val(endDate.toISOString().split('T')[0]);
 
-      },
+      }
 // ----------------------------END EVENT CLICK EDIT MODAL -----------------------------------------------
 
-
-// ----------------------------Script to update EVENT on Drag & Drop -----------------------------------------------
-      // eventDrop: function (event){
-      //   var id = event.id;
-      //   var start_date = moment(event.start).format('YYYY-MM-DD');
-      //   var end_date = moment(event.end).format('YYYY-MM-DD');
-      // }
-
-  //     eventDrop: function(info) {
-  //      alert(info.event.title + " was dropped on " + info.event.startStr);
-
-  //   if (!confirm("Are you sure about this change?")) {
-  //     alert("<?php update_event()?>");
-  //   }
-  // }
-// ----------------------------End Script to update EVENT on Drag & Drop -------------------------------------------  
     });
 
     calendar.render();
