@@ -72,7 +72,7 @@ class Publishing_Urlaubs_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		$valid_pages = array("publishing-urlaubs");
+		$valid_pages = array("publishing-urlaubs","publishing-add-birthday");
 
 		$page = isset($_REQUEST['page']) ? $_REQUEST['page'] : "";
 
@@ -81,6 +81,7 @@ class Publishing_Urlaubs_Admin {
 			wp_enqueue_style('roboto-font', 'https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
 			wp_enqueue_style('Bootstrap min cdn', 'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css');
 			wp_enqueue_style('Fullcalendar min cdn', 'https://cdn.jsdelivr.net/combine/npm/fullcalendar@5.11.3/main.min.css,npm/fullcalendar@5.11.3/main.min.css');
+			wp_enqueue_style('FontAwesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css');
 		}
 	}
 
@@ -102,7 +103,7 @@ class Publishing_Urlaubs_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		$valid_pages = array("publishing-urlaubs");
+		$valid_pages = array("publishing-urlaubs","publishing-add-birthday");
 
 		$page = isset($_REQUEST['page']) ? $_REQUEST['page'] : "";
 
@@ -126,16 +127,26 @@ class Publishing_Urlaubs_Admin {
 	function PublishingMenu()
 	{
 
+		// Creating the MAIN MENU 
+		add_menu_page('Publishing Urlaubs', 'Publishing Urlaubs', 'edit_others_posts', 'publishing-urlaubs', array($this, 'PublishingAdminDashboard'), plugin_dir_url(__FILE__) . 'img/publishing-urlaubs.png', 2);
 
-		add_menu_page('Publishing Urlaubs', 'Publishing Urlaubs', 'manage_options', 'publishing-urlaubs', array($this, 'PublishingAdminDashboard'), plugin_dir_url(__FILE__) . 'img/publishing-urlaubs.png', 2);
 
+		// Creating the Submenu
+		add_submenu_page("publishing-urlaubs","Add Birthday","Add Birthday","manage_options","publishing-add-birthday",array($this, 'PublishingBirthday'),22,"dashicons-calendar-alt" );
 	}
-
+	public function PublishingBirthday()
+	{
+		//return views 
+		require_once 'partials/workers.php';
+		echo addPublishingWorkers();
+	}
 	public function PublishingAdminDashboard()
 	{
 		//return views 
 		require_once 'partials/publishing-urlaubs-admin-display.php';
 		echo publishingUrlaubs();
 	}
+
+
 
 }
