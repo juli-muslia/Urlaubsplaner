@@ -28,6 +28,8 @@ function publishingUrlaubs (){
 
     require_once 'delete_event.php';
     delete_event();
+    require_once 'workers_crud.php';
+
 
     $current_user = wp_get_current_user(); // Gets current logged in user
 
@@ -75,18 +77,49 @@ $days_off = array_sum($daysOff); // Sum all elements of the array to give us the
 </style>
 
  
-<div class="container">
+<div class="container-fluid">
 
     <br>
         <h2 class="text-center" style="font-family: 'Roboto', sans-serif;"><span style="color:#DE0A2B">Publishing Group</span> Urlaubs Plan</h2>
-        <h4 class="text-center">Herzlich willkommen, <?php echo $current_user->display_name; ?> !</h4> <h5 class="text-center"> Sie haben bis jetzt <b style="color:#DE0A2B"><?php echo $days_off; ?>/28</b> Tage frei genommen.</h5>
+        <h4 class="text-center">Herzlich willkommen, <?php echo $current_user->display_name; ?> !<span class="text-center"> Sie haben bis jetzt <b style="color:#DE0A2B"><?php echo $days_off; ?>/28</b> Tage frei genommen.</span></h4> 
     <br>
 
-    <table id="example1" class="table table-bordered table-hover" style="margin-right:-10px">
-        <div id='calendar' class="col-centered"></div>
-    </table>
+   
 
-    
+      <div class='row'>
+				
+				<div class='col-md-3'>
+<?php
+        global $wpdb;
+        $table_name = $wpdb->prefix . "publishing_users";
+        $current_month_day=date("m-d");
+        $birthdays = $wpdb->get_results("Select * from $table_name WHERE DATE_FORMAT(DOB,'%m-%d') ='$current_month_day'");
+
+            foreach ($birthdays as $bdays){
+
+              $birthday_date = new DateTime($bdays->DOB);
+              $current_date = new DateTime((date('Y-m-d')));
+              $interval = $birthday_date->diff($current_date);
+              $diff = ($interval->y);
+
+              ?> 
+              <div class="alert alert-info mb-3 pt-4 pb-4" href="#"><h5><i class='fa fa-bell' style="font-size:28px"></i> Wünsche <b><?php echo ($bdays->NAME)?></b> alles Gute zum Geburtstag !! <br><hr><i class="fa-regular fa-face-grin-squint" style="font-size:28px"></i> Geburtsdatum in <b><?php echo ($bdays->DOB)?> </b> <hr style="margin-top: 0.1rem;
+    margin-bottom: 0.1rem; border-top-color:#abdde500"><b><i class="fa-solid fa-cake-candles" style="font-size:28px"></i> <?php echo $diff; ?></b> Jahre Alt !! </h5>
+              </div>  
+              <?php 
+            }
+            ?>
+
+					
+				</div>
+
+        <div class='col-md-8'>
+          <table id="example1" class="table table-bordered table-hover" style="margin-right:-10px">
+            <div id='calendar' class="col-centered"></div>
+          </table>
+        </div>
+			</div>
+		
 </div>
 
 <script>
