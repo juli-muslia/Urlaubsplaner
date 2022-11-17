@@ -39,7 +39,7 @@ function addPublishingWorkers (){
 
                   <div class="modal-body">
 
-                      <input type="text" name="delete_id" id="delete_id">
+                      <input type="hidden" name="delete_id" id="delete_id">
 
                       <h4 class="text-center"> Do you want to Delete this Worker?</h4>
                       <h6 class="alert alert-danger"> Note: After deletion your data will be deleted forever ! </h6>

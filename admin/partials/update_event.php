@@ -7,12 +7,18 @@ function update_event()
 
     if (isset($_POST['update_event'])) {
         $update_event_id = $_POST['edit_event_id'];
-
+        $current_user    = $_POST['current_user'];
         $update_event_name    = $_POST['edit_event_name'];
         $update_event_start_date  = $_POST['edit_event_start_date'];
         $update_event_end_date  = $_POST['edit_event_end_date'];
         $update_event_color    = $_POST['edit_color'];
 
+        if(($_POST['current_user'] !== $_POST['edit_event_name']) xor (current_user_can('administrator')) ){
+            echo '<div class="alert alert-danger text-center" role="alert">
+            <h3>You are not allowed to update others events</h3>
+                  </div>
+                  <meta http-equiv="refresh" content="5">';
+        } else {
 
         $query = $wpdb->query(" UPDATE $table_name SET event_name='$update_event_name', event_start_date='$update_event_start_date', event_end_date='$update_event_end_date', color='$update_event_color' WHERE event_id='$update_event_id' ");
 
@@ -30,4 +36,5 @@ function update_event()
                   <meta http-equiv="refresh" content="5">';
         }
     }
+}
 }

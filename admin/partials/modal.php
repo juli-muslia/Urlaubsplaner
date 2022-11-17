@@ -37,7 +37,7 @@ function modal () {
 							<div class="col-sm-6">  
 								<div class="form-group">
 								<label for="event_start_date">Anfangsdatum</label>
-								<input type="date" name="event_start_date" id="event_start_date" class="form-control onlydatepicker" placeholder="Event start date"required>
+								<input type="date" name="event_start_date" id="event_start_date" class="form-control onlydatepicker" placeholder="Event start date" required>
 								</div>
 							</div>
 							<div class="col-sm-6">  
@@ -79,10 +79,17 @@ function modal () {
 								<input type="text" name="edit_event_id" id="edit_event_id" class="form-control" hidden >
 								</div>
 							</div>
+
+
+								<input type="text" name="current_user" id="current_user" class="form-control" required value="<?php echo $current_user->display_name; ?>" hidden >
+
 							<div class="col-sm-12">  
 								<div class="form-group">
+
 								<label for="event_name">Name</label>
-								<input type="text" name="edit_event_name" id="edit_event_name" class="form-control" required value="<?php $current_user = wp_get_current_user(); echo $current_user->display_name?>" readonly>
+								<input type="text" name="edit_event_name" id="edit_event_name" class="form-control" required readonly>
+
+								<!-- <input type="text" name="edit_event_name" id="edit_event_name" class="form-control" required value="<?php $current_user = wp_get_current_user(); echo $current_user->display_name?>" readonly> -->
 								</div>
 							</div>
 
@@ -110,8 +117,19 @@ function modal () {
 					</div>
 				</div>
 				<div class="modal-footer">
+
 					<button type="submit" name="update_event" class="btn btn-primary">Aktualisieren</button>
-					<button type="button"  class="btn btn-danger" data-toggle="modal" data-target="#deletemodal"> Löschen </button>
+					
+					<!-- If user is admin can delete the event -->
+					<?php
+						if ( current_user_can('administrator')) {
+							?>
+							<button type="button"  class="btn btn-danger" data-toggle="modal" data-target="#deletemodal"> Löschen </button>
+							<?php
+						}
+						?>
+	
+
 				</div>
 			</form>
 		</div>

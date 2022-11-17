@@ -21,6 +21,16 @@ function insert_event()
             <h3> Daten erfolgreich gespeichert !</h3>
             </div>
             <meta http-equiv="refresh" content="2">';
+
+            
+            // 3 Variables + Function to send an email when user saves new urlaubs
+
+            $mailto='mj@publishing-group.de'; 
+            $subject='Neue Urlaubs geplannt ';
+            $message=' Hallo Admin!  <br> Benutzer' . $new_name . ' hat neue Urlaubs geplant!'; 
+
+            wp_mail( $mailto, $subject, $message);
+        
         }
         else {
         echo    '<div class="alert alert-danger text-center" role="alert">

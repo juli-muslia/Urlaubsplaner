@@ -18,6 +18,10 @@ function publishingUrlaubs (){
   global $wpdb;
   $table_name = $wpdb->prefix . "publishing_urlaubs";
   $events = $wpdb->get_results("Select * from $table_name");
+
+  $feuertag_table_name = $wpdb->prefix . "publishing_feuertage";
+  $feuertagen = $wpdb->get_results("Select * from $feuertag_table_name");
+
     require_once 'modal.php';
     modal();
 
@@ -68,11 +72,22 @@ $days_off = array_sum($daysOff); // Sum all elements of the array to give us the
 <style>
 #calendar {
   max-width: 1300px;
-  margin: 0 auto
-
+  margin: 0 auto;
 }
+/* 
+    IF WEEKEND IS DISPLAYED CAN CHANGE THE DISPLAY COLOR OF SATURDAY & SUNDAY !
 .fc-day-sat, .fc-day-sun {
     background-color: gray !important;
+} */
+
+/* 
+  IF ENABLED YOU CAN CHANGE THE COLOR OF THE TODAYS DATE !
+.fc .fc-daygrid-day.fc-day-today {
+  background-color:red!important;
+} */
+
+.fc-bg-event {
+    opacity: 1!important;
 }
 </style>
 
@@ -81,7 +96,8 @@ $days_off = array_sum($daysOff); // Sum all elements of the array to give us the
 
     <br>
         <h2 class="text-center" style="font-family: 'Roboto', sans-serif;"><span style="color:#DE0A2B">Publishing Group</span> Urlaubs Plan</h2>
-        <h4 class="text-center">Herzlich willkommen, <?php echo $current_user->display_name; ?> !<span class="text-center"> Sie haben bis jetzt <b style="color:#DE0A2B"><?php echo $days_off; ?>/28</b> Tage frei genommen.</span></h4> 
+        <h4 class="text-center">Herzlich willkommen, <?php echo $current_user->display_name; ?> !<span class="text-center"> Sie haben bis jetzt <b style="color:#DE0A2B"><?php echo $days_off; ?>/28</b> Tage frei genommen.</span></h4>
+        <h6 class="text-center" style="font-family: 'Roboto', sans-serif;">Bitte klicken Sie nicht auf die roten Daten</h6>
     <br>
 
    
@@ -126,6 +142,7 @@ $days_off = array_sum($daysOff); // Sum all elements of the array to give us the
 
   document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
+    
     var initialLocaleCode = 'de'; // Display language of the calendar 
     var calendar = new FullCalendar.Calendar(calendarEl, {
         locale: initialLocaleCode,
@@ -136,6 +153,7 @@ $days_off = array_sum($daysOff); // Sum all elements of the array to give us the
       selectMirror: true,
       eventLimit: true,
 	  	selectHelper: true,
+     
           // editable: true,  // True -- MAKE EVENT DRAGGABLE -- FALSE -- MAKE EVENT NOT DRAGGABLE
           // timeZone: 'local',
           // left: 'prev,next today',
@@ -159,7 +177,8 @@ $days_off = array_sum($daysOff); // Sum all elements of the array to give us the
 
 // ------------------ Gets all the data from the database and displays it to the calendar. ------------------ 
              events: [ 
-        <?php
+              
+                <?php
           if ($events) {
             foreach ($events as $event)
             {
@@ -169,12 +188,47 @@ $days_off = array_sum($daysOff); // Sum all elements of the array to give us the
                 title: '<?php echo $event->event_name; ?>',
                 start: '<?php echo $event->event_start_date; ?>',
                 end: '<?php echo $event->event_end_date; ?>',
-                color: '<?php echo $event->color; ?>'
+                color: '<?php echo $event->color; ?>',
               },
        <?php
            }
           }
-        ?>   
+        ?>  
+        
+        
+        // Adds a RED colour to the dates that must not be selected   
+
+        <?php
+          if ($feuertagen) {
+            foreach ($feuertagen as $feuertag)
+            {
+        ?>  
+          {   
+                start: '<?php echo $feuertag->feuertag_start_date ?>',
+                end: '<?php echo $feuertag->feuertag_end_date; ?>',
+                overlap: <?php echo $feuertag->feuertag_overlap; ?>,
+                display: '<?php echo $feuertag->feuertag_display; ?>',
+                color: '<?php echo $feuertag->feuertag_color; ?>',
+              },
+              <?php
+           }
+          }
+        ?>  
+      //     {  
+      //   start: '2022-11-16',
+      //   end: '2022-08-16',
+      //   overlap: false,
+      //   display: 'background',
+      //   color: '#FF0000'
+      // },
+      // {
+             
+      //        start: '2022-11-18',
+      //        end: '2022-08-18',
+      //        overlap: false,
+      //        display: 'background',
+      //        color: '#FF0000'
+      //      }
       ],
 // ----------------------------END DATA DISPLAY FROM DATABASE -----------------------------------------------
 
@@ -197,15 +251,14 @@ $days_off = array_sum($daysOff); // Sum all elements of the array to give us the
         $('#edit_urlaub #edit_event_id').val(info.event.id);    
         $('#deletemodal #delete_event_id').val(info.event.id);    // When user clicks the Event even the DELETE MODAL Gets the ID of the EVENT     
         $('#edit_urlaub #edit_event_name').val(info.event.title);
-  
         $('#edit_urlaub #edit_event_start_date').val(startDate.toISOString().split('T')[0]);
         $('#edit_urlaub #edit_event_end_date').val(endDate.toISOString().split('T')[0]);
 
-      }
+      },
 // ----------------------------END EVENT CLICK EDIT MODAL -----------------------------------------------
 
     });
-
+    
     calendar.render();
   });
 

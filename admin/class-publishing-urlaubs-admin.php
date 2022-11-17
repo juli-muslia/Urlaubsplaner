@@ -72,7 +72,7 @@ class Publishing_Urlaubs_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		$valid_pages = array("publishing-urlaubs","publishing-add-birthday");
+		$valid_pages = array('publishing-urlaubs','publishing-add-birthday','publishing-add-feuertage');
 
 		$page = isset($_REQUEST['page']) ? $_REQUEST['page'] : "";
 
@@ -103,7 +103,7 @@ class Publishing_Urlaubs_Admin {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-		$valid_pages = array("publishing-urlaubs","publishing-add-birthday");
+		$valid_pages = array('publishing-urlaubs','publishing-add-birthday','publishing-add-feuertage');
 
 		$page = isset($_REQUEST['page']) ? $_REQUEST['page'] : "";
 
@@ -133,13 +133,16 @@ class Publishing_Urlaubs_Admin {
 
 		// Creating the Submenu
 		add_submenu_page("publishing-urlaubs","Add Birthday","Add Birthday","manage_options","publishing-add-birthday",array($this, 'PublishingBirthday'),22,"dashicons-calendar-alt" );
+		
+		// Creating the Submenu
+		add_submenu_page("publishing-urlaubs","Add Feuertage","Add Feuertage","manage_options","publishing-add-feuertage",array($this, 'PublishingFeuertagen'),22,"dashicons-calendar-alt" );
+	
+	
+	
 	}
-	public function PublishingBirthday()
-	{
-		//return views 
-		require_once 'partials/workers.php';
-		echo addPublishingWorkers();
-	}
+
+
+
 	public function PublishingAdminDashboard()
 	{
 		//return views 
@@ -147,6 +150,18 @@ class Publishing_Urlaubs_Admin {
 		echo publishingUrlaubs();
 	}
 
+	public function PublishingBirthday()
+	{
+		//return views 
+		require_once 'partials/workers.php';
+		echo addPublishingWorkers();
+	}
 
+	public function PublishingFeuertagen()
+	{
+		//return views 
+		require_once 'partials/feuertagen_ui.php';
+		echo addPublishingFeuertagen();
+	}
 
 }

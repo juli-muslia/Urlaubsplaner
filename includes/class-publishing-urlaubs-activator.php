@@ -50,17 +50,36 @@ class Publishing_Urlaubs_Activator {
 		  ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 		
 		
-		
-		// CREATE TABLE $table_name (
-		// id int(11) NOT NULL AUTO_INCREMENT,
-		// title varchar(255) NOT NULL,
-		// color varchar(20) NOT NULL,
-		// start datetime NULL,
-		// end datetime NULL,
-		// status int(11) NULL,
-		// t_stamp timestamp,
-		// PRIMARY KEY  (id)
-		// )ENGINE=InnoDB DEFAULT CHARSET=latin1";
+
 		require_once (ABSPATH . 'wp-admin/includes/upgrade.php');
 		dbDelta( $table_query);
+
+		$users_bday = $wpdb->prefix . "publishing_users";		
+		$users_bday_query= "
+		CREATE TABLE $users_bday (
+		ID int(11) NOT NULL AUTO_INCREMENT,
+		NAME varchar(150) NOT NULL,
+		EMAIL varchar(150) NOT NULL,
+		DOB date NOT NULL,
+		PRIMARY KEY (ID)
+	  ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1";
+
+	  require_once (ABSPATH . 'wp-admin/includes/upgrade.php');
+	  dbDelta($users_bday_query);
+
+
+	  $feuertage = $wpdb->prefix . "publishing_feuertage";		
+	  $feuertage_query= "
+	  CREATE TABLE $feuertage (
+	  ID int(11) NOT NULL AUTO_INCREMENT,
+			feuertag_start_date date DEFAULT NULL,
+			feuertag_end_date date DEFAULT NULL,
+			feuertag_overlap varchar(255) DEFAULT NULL,
+			feuertag_display varchar(255) DEFAULT NULL,
+			feuertag_color varchar(20) NULL,
+	  PRIMARY KEY (ID)
+	) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1";
+
+	require_once (ABSPATH . 'wp-admin/includes/upgrade.php');
+	dbDelta($feuertage_query);
 	}
