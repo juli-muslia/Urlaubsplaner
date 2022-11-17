@@ -62,7 +62,10 @@ function addPublishingFeuertagen (){
                             <label>Start Date</label>
                             <input type="date" class="form-control"  name='start_date' id='start_date' placeholder="Start Date" required>
                         </div>
-    
+                        <div class="form-group">
+                            <label>End Date</label>
+                            <input type="date" class="form-control"  name='end_date' id='end_date' placeholder="End Date" required>
+                        </div>
                         <div class="form-group">
                             <input type='submit' name='insert_feuertag' id="insert_feuertag" value='Submit' class='btn btn-primary'>
                         </div>

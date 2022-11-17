@@ -8,7 +8,7 @@ function insert_feuertagen()
     if (isset($_POST['insert_feuertag'])) 
 {
         $start_date = $_POST['start_date'];
-        $end_date = $_POST['start_date'];
+        $end_date = $_POST['end_date'];
      
 
 
