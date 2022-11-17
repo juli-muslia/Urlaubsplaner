@@ -7,9 +7,9 @@ function add_workers()
 
     if (isset($_POST['insert_worker'])) 
 {
-        $new_username = $_POST['name'];
-        $new_email = $_POST['email'];
-        $new_dob = $_POST['dob'];
+        $new_username = sanitize_text_field($_POST['name']);
+        $new_email = sanitize_email($_POST['email']);
+        $new_dob = preg_replace("([^0-9/])", "", $_POST['dob']);
      
 
 

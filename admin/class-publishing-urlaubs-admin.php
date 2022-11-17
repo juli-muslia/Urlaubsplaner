@@ -115,6 +115,7 @@ class Publishing_Urlaubs_Admin {
 			wp_enqueue_script('Fullcalendar js', plugin_dir_url( __FILE__ ) . 'js/locales-all.min.js');
 			wp_enqueue_script('Sweetalert cdn', plugin_dir_url( __FILE__ ) . 'js/sweetalert.min.js');
 			wp_enqueue_script('MomentJs cdn', plugin_dir_url( __FILE__ ) . 'js/moment.min.js');
+			wp_enqueue_script('Fontawesome cdn', plugin_dir_url( __FILE__ ) . 'js/all.min.js');
 		}
 	}
 

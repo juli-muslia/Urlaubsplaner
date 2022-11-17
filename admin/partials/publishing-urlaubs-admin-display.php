@@ -25,12 +25,9 @@ function publishingUrlaubs (){
     require_once 'modal.php';
     modal();
 
-    require_once 'insert_event.php';
+    require_once 'events_crud.php';
     insert_event();
-    require_once 'update_event.php';
     update_event();
-
-    require_once 'delete_event.php';
     delete_event();
     require_once 'workers_crud.php';
 
@@ -48,7 +45,7 @@ function publishingUrlaubs (){
 
     // Displays this message for the user that does not have any days off !
 if ( count($items) == 0 )
-echo '<div class="alert alert-warning text-center" role="alert"> Hi, ' . $current_user->display_name . '! You haven\'t added any vacations ! </div>' ;
+echo '<div class="alert alert-warning text-center" role="alert"> Hi, ' .esc_attr( $current_user->display_name) . '! You haven\'t added any vacations ! </div>' ;
 
 $length = count($items); // Gets Array Length 
 
@@ -96,7 +93,7 @@ $days_off = array_sum($daysOff); // Sum all elements of the array to give us the
 
     <br>
         <h2 class="text-center" style="font-family: 'Roboto', sans-serif;"><span style="color:#DE0A2B">Publishing Group</span> Urlaubs Plan</h2>
-        <h4 class="text-center">Herzlich willkommen, <?php echo $current_user->display_name; ?> !<span class="text-center"> Sie haben bis jetzt <b style="color:#DE0A2B"><?php echo $days_off; ?>/28</b> Tage frei genommen.</span></h4>
+        <h4 class="text-center">Herzlich willkommen, <?php echo esc_attr($current_user->display_name); ?> !<span class="text-center"> Sie haben bis jetzt <b style="color:#DE0A2B"><?php echo esc_attr($days_off); ?>/28</b> Tage frei genommen.</span></h4>
         <h6 class="text-center" style="font-family: 'Roboto', sans-serif;">Bitte klicken Sie nicht auf die roten Daten</h6>
     <br>
 
@@ -108,7 +105,7 @@ $days_off = array_sum($daysOff); // Sum all elements of the array to give us the
 <?php
         global $wpdb;
         $table_name = $wpdb->prefix . "publishing_users";
-        $current_month_day=date("m-d");
+        $current_month_day= date("m-d");
         $birthdays = $wpdb->get_results("Select * from $table_name WHERE DATE_FORMAT(DOB,'%m-%d') ='$current_month_day'");
 
             foreach ($birthdays as $bdays){
@@ -119,8 +116,8 @@ $days_off = array_sum($daysOff); // Sum all elements of the array to give us the
               $diff = ($interval->y);
 
               ?> 
-              <div class="alert alert-info mb-3 pt-4 pb-4" href="#"><h5><i class='fa fa-bell' style="font-size:28px"></i> Wünsche <b><?php echo ($bdays->NAME)?></b> alles Gute zum Geburtstag !! <br><hr><i class="fa-regular fa-face-grin-squint" style="font-size:28px"></i> Geburtsdatum in <b><?php echo ($bdays->DOB)?> </b> <hr style="margin-top: 0.1rem;
-    margin-bottom: 0.1rem; border-top-color:#abdde500"><b><i class="fa-solid fa-cake-candles" style="font-size:28px"></i> <?php echo $diff; ?></b> Jahre Alt !! </h5>
+              <div class="alert alert-info mb-3 pt-4 pb-4" href="#"><h5><i class='fa fa-bell' style="font-size:28px"></i> Wünsche <b><?php echo esc_attr(($bdays->NAME))?></b> alles Gute zum Geburtstag !! <br><hr><i class="fa-regular fa-face-grin-squint" style="font-size:28px"></i> Geburtsdatum in <b><?php echo esc_attr(($bdays->DOB))?> </b> <hr style="margin-top: 0.1rem;
+    margin-bottom: 0.1rem; border-top-color:#abdde500"><b><i class="fa-solid fa-cake-candles" style="font-size:28px"></i> <?php echo esc_attr( $diff); ?></b> Jahre Alt !! </h5>
               </div>  
               <?php 
             }
@@ -184,11 +181,11 @@ $days_off = array_sum($daysOff); // Sum all elements of the array to give us the
             {
         ?>  
               {   
-                id: '<?php echo $event->event_id; ?>',
-                title: '<?php echo $event->event_name; ?>',
-                start: '<?php echo $event->event_start_date; ?>',
-                end: '<?php echo $event->event_end_date; ?>',
-                color: '<?php echo $event->color; ?>',
+                id: '<?php echo esc_attr( $event->event_id); ?>',
+                title: '<?php echo esc_attr( $event->event_name); ?>',
+                start: '<?php echo esc_attr( $event->event_start_date); ?>',
+                end: '<?php echo esc_attr( $event->event_end_date); ?>',
+                color: '<?php echo esc_attr( $event->color); ?>',
               },
        <?php
            }
@@ -204,31 +201,24 @@ $days_off = array_sum($daysOff); // Sum all elements of the array to give us the
             {
         ?>  
           {   
-                start: '<?php echo $feuertag->feuertag_start_date ?>',
-                end: '<?php echo $feuertag->feuertag_end_date; ?>',
-                overlap: <?php echo $feuertag->feuertag_overlap; ?>,
-                display: '<?php echo $feuertag->feuertag_display; ?>',
-                color: '<?php echo $feuertag->feuertag_color; ?>',
+                start: '<?php echo esc_attr( $feuertag->feuertag_start_date); ?>',
+                end: '<?php echo esc_attr( $feuertag->feuertag_end_date); ?>',
+                overlap: <?php echo esc_attr( $feuertag->feuertag_overlap); ?>,
+                display: '<?php echo esc_attr( $feuertag->feuertag_display); ?>',
+                color: '<?php echo esc_attr( $feuertag->feuertag_color); ?>',
               },
               <?php
            }
           }
         ?>  
-      //     {  
+      //  Example of a statick event    
+      //{  
       //   start: '2022-11-16',
       //   end: '2022-08-16',
       //   overlap: false,
       //   display: 'background',
       //   color: '#FF0000'
       // },
-      // {
-             
-      //        start: '2022-11-18',
-      //        end: '2022-08-18',
-      //        overlap: false,
-      //        display: 'background',
-      //        color: '#FF0000'
-      //      }
       ],
 // ----------------------------END DATA DISPLAY FROM DATABASE -----------------------------------------------
 
