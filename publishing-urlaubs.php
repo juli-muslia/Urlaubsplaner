@@ -15,7 +15,7 @@
  * @wordpress-plugin
  * Plugin Name:       Publishing Urlaubs
  * Plugin URI:        https://publishing-group.de
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Publishing Group Urlaubs Plan is a plugin developed for Publishing Group GmbH vacation planner
  * Version:           1.0.0
  * Author:            Julian Muslia
  * Author URI:        https://julianmuslia.com
