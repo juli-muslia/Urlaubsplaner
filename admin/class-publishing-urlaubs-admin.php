@@ -78,10 +78,10 @@ class Publishing_Urlaubs_Admin {
 
 		if (in_array($page, $valid_pages)) {
 			wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/publishing-urlaubs-admin.css', array(), $this->version, 'all' );
-			wp_enqueue_style('roboto-font', 'https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap');
-			wp_enqueue_style('Bootstrap min cdn', 'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css');
-			wp_enqueue_style('Fullcalendar min cdn', 'https://cdn.jsdelivr.net/combine/npm/fullcalendar@5.11.3/main.min.css,npm/fullcalendar@5.11.3/main.min.css');
-			wp_enqueue_style('FontAwesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css');
+			wp_enqueue_style('roboto-font', plugin_dir_url( __FILE__ ) . 'css/css2.css');
+			wp_enqueue_style('Bootstrap min cdn',plugin_dir_url( __FILE__ ) . 'css/bootstrap.min.css');
+			wp_enqueue_style('Fullcalendar min cdn', plugin_dir_url( __FILE__ ) . 'css/main.min.css');
+			wp_enqueue_style('FontAwesome', plugin_dir_url( __FILE__ ) . 'css/all.min.css');
 		}
 	}
 
@@ -109,12 +109,12 @@ class Publishing_Urlaubs_Admin {
 
 		if (in_array($page, $valid_pages)) {
 			wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/publishing-urlaubs-admin.js', array( 'jquery' ), $this->version, false );
-			wp_enqueue_script('Jquery cdn', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js');
-			wp_enqueue_script('Bootstrap js', 'https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js');
-			wp_enqueue_script('Popper ', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js');
-			wp_enqueue_script('Fullcalendar js', 'https://cdn.jsdelivr.net/combine/npm/fullcalendar@5.11.3,npm/fullcalendar@5.11.3/main.min.js,npm/fullcalendar@5.11.3/locales-all.min.js,npm/fullcalendar@5.11.3/locales-all.min.js');
-			wp_enqueue_script('Sweetalert cdn', 'https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js');
-			wp_enqueue_script('MomentJs cdn', 'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js');
+			wp_enqueue_script('Jquery cdn', plugin_dir_url( __FILE__ ) . 'js/jquery.min.js');
+			wp_enqueue_script('Bootstrap js', plugin_dir_url( __FILE__ ) . 'js/bootstrap.min.js');
+			wp_enqueue_script('Popper ', plugin_dir_url( __FILE__ ) . 'js/popper.min.js');
+			wp_enqueue_script('Fullcalendar js', plugin_dir_url( __FILE__ ) . 'js/locales-all.min.js');
+			wp_enqueue_script('Sweetalert cdn', plugin_dir_url( __FILE__ ) . 'js/sweetalert.min.js');
+			wp_enqueue_script('MomentJs cdn', plugin_dir_url( __FILE__ ) . 'js/moment.min.js');
 		}
 	}
 
