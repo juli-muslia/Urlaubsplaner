@@ -28,7 +28,7 @@ function insert_event()
 
             $mailto='mj@publishing-group.de'; 
             $subject='Neue Urlaubs geplannt ';
-            $message=' Hallo Admin!  <br> Benutzer' . $new_name . ' hat neue Urlaubs geplant!'; 
+            $message=' Hallo Admin!  <br> Benutzer ' . $new_name . ' hat neue Urlaubs geplant!'; 
 
             wp_mail( $mailto, $subject, $message);
         
