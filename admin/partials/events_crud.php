@@ -24,13 +24,27 @@ function insert_event()
             <meta http-equiv="refresh" content="2">';
 
             
-            // 3 Variables + Function to send an email when user saves new urlaubs
+            global $wpdb;
+            $get_email_settings = $wpdb->prefix . "publishing_email";
+               $query = $wpdb->get_results("Select * from $get_email_settings");
+               if ($query){
+                foreach ($query as $row){
 
-            $mailto='mj@publishing-group.de'; 
-            $subject='Neue Urlaubs geplannt ';
-            $message=' Hallo Admin! Benutzer ' . $new_name . ' hat neue Urlaubs geplant!'; 
+
+                  $email_list = $row->email_list;
+                  $email_subject = $row->email_subject;
+                  $email_text = $row->email_text;
+                    
+
+                }
+            }    
+            $mailto = $email_list; 
+            $subject =$email_subject;
+            $message = $email_text .' <br> User that booked new holidays: <strong>'. $new_name . ' </strong> <br> Holiday starts on :  <strong> ' . date( 'd-m-Y', $new_start_date) .' </strong> 
+            <br> Returning date :   <strong> ' . date( 'd-m-Y', $new_end_date)  .' </strong> '; 
 
             wp_mail( $mailto, $subject, $message);
+            
         
         }
         else {

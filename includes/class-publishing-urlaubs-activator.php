@@ -82,4 +82,18 @@ class Publishing_Urlaubs_Activator {
 
 	require_once (ABSPATH . 'wp-admin/includes/upgrade.php');
 	dbDelta($feuertage_query);
+
+	$email_settings = $wpdb->prefix . "publishing_email";		
+	$email_settings_query= "
+	CREATE TABLE $email_settings (
+	ID int(11) NOT NULL AUTO_INCREMENT,
+		  email_list varchar(255) DEFAULT NULL,
+		  email_subject varchar(255) DEFAULT NULL,
+		  email_text text NULL,
+	PRIMARY KEY (ID)
+  ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1";
+
+  require_once (ABSPATH . 'wp-admin/includes/upgrade.php');
+  dbDelta($email_settings_query);
+
 	}

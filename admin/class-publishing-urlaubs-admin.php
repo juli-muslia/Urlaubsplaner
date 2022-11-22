@@ -136,8 +136,8 @@ class Publishing_Urlaubs_Admin {
 		add_submenu_page("publishing-urlaubs","Add Birthday","Add Birthday","manage_options","publishing-add-birthday",array($this, 'PublishingBirthday'),22,"dashicons-calendar-alt" );
 		
 		// Creating the Submenu
-		add_submenu_page("publishing-urlaubs","Add Feuertage","Add Feuertage","manage_options","publishing-add-feuertage",array($this, 'PublishingFeuertagen'),22,"dashicons-calendar-alt" );
-	
+		add_submenu_page("publishing-urlaubs","Holidays & Email Config","Holidays & Email Config","manage_options","publishing-add-feuertage",array($this, 'PublishingFeuertagen'),22,"dashicons-calendar-alt" );
+
 	
 	
 	}

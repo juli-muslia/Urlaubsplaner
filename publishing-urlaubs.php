@@ -16,7 +16,7 @@
  * Plugin Name:       Publishing Urlaubs
  * Plugin URI:        https://publishing-group.de
  * Description:       Publishing Group Urlaubs Plan is a plugin developed for Publishing Group GmbH vacation planner
- * Version:           1.0.0
+ * Version:           1.2.0
  * Author:            Julian Muslia
  * Author URI:        https://julianmuslia.com
  * License:           GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'PUBLISHING_URLAUBS_VERSION', '1.0.0' );
+define( 'PUBLISHING_URLAUBS_VERSION', '1.2.0' );
 
 /**
  * The code that runs during plugin activation.

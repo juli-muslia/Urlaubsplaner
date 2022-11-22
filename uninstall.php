@@ -36,6 +36,7 @@ $tableArray = array(
 	$wpdb->prefix . "publishing_urlaubs",
 	$wpdb->prefix . "publishing_users",
 	$wpdb->prefix . "publishing_feuertage",
+	$wpdb->prefix . "publishing_email",
 );
 foreach ($tableArray as $tablename) {
 	$wpdb->query("DROP TABLE IF EXISTS $tablename");
