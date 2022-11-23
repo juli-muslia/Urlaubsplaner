@@ -23,7 +23,9 @@ function insert_event()
             </div>
             <meta http-equiv="refresh" content="2">';
 
-            
+            $email_list = ""; 
+            $email_subject ="";
+            $email_text ="";
             global $wpdb;
             $get_email_settings = $wpdb->prefix . "publishing_email";
                $query = $wpdb->get_results("Select * from $get_email_settings");

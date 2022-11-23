@@ -112,6 +112,8 @@ function addPublishingFeuertagen (){
 
 <!-- END ADD HOLIDAYS UI  -->
 
+<!--  /*********************************************************************************************************************/-->
+
 <!-- START EDIT POP UP FOR EMAIL SETTINGS -->
 <div class="modal fade" id="edit_email" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-dialog-centered" role="document">
@@ -179,6 +181,8 @@ function addPublishingFeuertagen (){
 </div>
 <!-- END EDIT POP UP FOR EMAIL SETTTINGS -->
 
+<!--  /*********************************************************************************************************************/-->
+
 <!-- START DELETE POP UP FORM FOR EMAIL SETTINGS -->
 <div class="modal fade" id="delete_email_settings_popup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
       aria-hidden="true">
@@ -211,7 +215,7 @@ function addPublishingFeuertagen (){
   </div>
 <!-- END DELETE POP UP FORM FOR EMAIL SETTING -->
 
-
+<!--  /*********************************************************************************************************************/-->
 
 <!-- START ADD EMAIL SETTINGS UI  -->
         <br><br>
@@ -283,12 +287,12 @@ function addPublishingFeuertagen (){
                         </div>
                         <div class="form-group">
                             <label>Subject of the email</label>
-                            <input type="text" class="form-control"  name='email_subject' id='email_subject' placeholder="Write the email subject">
+                            <input type="text" class="form-control"  name='email_subject' id='email_subject' placeholder="Write the email subject" required>
                         </div>
 
                         <div class="form-group">
                              <label>Text of the email</label>
-                            <textarea class="form-control"  name='email_text' id='email_text' rows="3"  placeholder="Please write a generic email. This can not be a personalized email for every email list." ></textarea>
+                            <textarea class="form-control"  name='email_text' id='email_text' rows="3"  placeholder="Please write a generic email. This can not be a personalized email for every email list." required ></textarea>
                         </div>
                         <div class="form-group">
                         
