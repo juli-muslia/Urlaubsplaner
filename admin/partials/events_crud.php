@@ -42,8 +42,7 @@ function insert_event()
             }    
             $mailto = $email_list; 
             $subject =$email_subject;
-            $message = $email_text .' <br> User that booked new holidays: <strong>'. $new_name . ' </strong> <br> Holiday starts on :  <strong> ' . date( 'd-m-Y', $new_start_date) .' </strong> 
-            <br> Returning date :   <strong> ' . date( 'd-m-Y', $new_end_date)  .' </strong> '; 
+            $message = $email_text; 
 
             wp_mail( $mailto, $subject, $message);
             
