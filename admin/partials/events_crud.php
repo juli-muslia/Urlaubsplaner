@@ -1,5 +1,7 @@
 <?php
-
+function email_html(){
+    return 'text/html';
+}
 function insert_event()
 {
     global $wpdb;
@@ -42,10 +44,17 @@ function insert_event()
             }    
             $mailto = $email_list; 
             $subject =$email_subject;
-            $message = $email_text;
-            // $message = $email_text .' <br> User that booked new holidays: <strong>'. $new_name . ' </strong> <br> Holiday starts on :  <strong> ' . date( 'd-m-Y', $new_start_date) .' </strong> 
-            // <br> Returning date :   <strong> ' . date( 'd-m-Y', $new_end_date)  .' </strong> '; 
+            // $message = $email_text;
+            $starting_date_str = strtotime($new_start_date);
 
+            $starting_date = date('d-m-Y',$starting_date_str);
+
+            $ending_date_str = strtotime($new_end_date);
+            $ending_date= date('d-m-Y', $ending_date_str);
+
+             $message = $email_text .' <br> User that booked new holidays: <strong>'. $new_name . ' </strong> <br> Holiday starts on :  <strong> ' . date($starting_date) .' </strong> 
+             <br> Returning date :   <strong> ' . date($ending_date)  .' </strong> '; 
+            add_filter( 'wp_mail_content_type', 'email_html');
             wp_mail( $mailto, $subject, $message);
             
         
@@ -74,28 +83,30 @@ function update_event()
         $update_event_end_date  = preg_replace("([^0-9/])", "", $_POST['edit_event_end_date']);
         $update_event_color    = sanitize_hex_color($_POST['edit_color']);
 
-        if(($_POST['current_user'] !== $_POST['edit_event_name']) xor (current_user_can('administrator')) ){
+        if(( (current_user_can( 'administrator' )) or  $_POST['current_user'] == $_POST['edit_event_name'])){
+
+            $query = $wpdb->query(" UPDATE $table_name SET event_name='$update_event_name', event_start_date='$update_event_start_date', event_end_date='$update_event_end_date', color='$update_event_color' WHERE event_id='$update_event_id' ");
+
+
+            if ($query) {
+                echo '<div class="alert alert-success text-center" role="alert">
+                <h3>Daten erfolgreich aktualisiert!</h3>
+                      </div>
+                      <meta http-equiv="refresh" content="2">'; 
+            }
+            else {
+                echo '<div class="alert alert-danger text-center" role="alert">
+                <h3>Daten nicht erfolgreich aktualisiert!</h3>
+                      </div>
+                      <meta http-equiv="refresh" content="5">';
+            }
+        
+        } else  {
             echo '<div class="alert alert-danger text-center" role="alert">
             <h3>You are not allowed to update others events</h3>
                   </div>
                   <meta http-equiv="refresh" content="5">';
-        } else {
-
-        $query = $wpdb->query(" UPDATE $table_name SET event_name='$update_event_name', event_start_date='$update_event_start_date', event_end_date='$update_event_end_date', color='$update_event_color' WHERE event_id='$update_event_id' ");
-
-
-        if ($query) {
-            echo '<div class="alert alert-success text-center" role="alert">
-            <h3>Daten erfolgreich aktualisiert!</h3>
-                  </div>
-                  <meta http-equiv="refresh" content="2">'; 
-        }
-        else {
-            echo '<div class="alert alert-danger text-center" role="alert">
-            <h3>Daten nicht erfolgreich aktualisiert!</h3>
-                  </div>
-                  <meta http-equiv="refresh" content="5">';
-        }
+      
     }
 }
 }

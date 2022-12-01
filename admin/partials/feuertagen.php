@@ -68,7 +68,7 @@ function insert_email_settings()
 {
         $email_list = sanitize_text_field($_POST['email_list']);
         $email_subject = sanitize_text_field($_POST['email_subject']);
-        $email_text = sanitize_text_field($_POST['email_text']);
+        $email_text = $_POST['email_text'];
 
 
 

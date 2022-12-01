@@ -62,7 +62,7 @@ class Publishing_Urlaubs_Activator {
 		EMAIL varchar(150) NOT NULL,
 		DOB date NOT NULL,
 		PRIMARY KEY (ID)
-	  ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1";
+	  ) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 
 	  require_once (ABSPATH . 'wp-admin/includes/upgrade.php');
 	  dbDelta($users_bday_query);
@@ -78,7 +78,7 @@ class Publishing_Urlaubs_Activator {
 			feuertag_display varchar(255) DEFAULT NULL,
 			feuertag_color varchar(20) NULL,
 	  PRIMARY KEY (ID)
-	) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1";
+	) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 
 	require_once (ABSPATH . 'wp-admin/includes/upgrade.php');
 	dbDelta($feuertage_query);
@@ -89,9 +89,9 @@ class Publishing_Urlaubs_Activator {
 	ID int(11) NOT NULL AUTO_INCREMENT,
 		  email_list varchar(255) DEFAULT NULL,
 		  email_subject varchar(255) DEFAULT NULL,
-		  email_text text NULL,
+		  email_text text COLLATE utf8_unicode_ci NULL,
 	PRIMARY KEY (ID)
-  ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1";
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci";
 
   require_once (ABSPATH . 'wp-admin/includes/upgrade.php');
   dbDelta($email_settings_query);

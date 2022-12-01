@@ -163,15 +163,7 @@ function addPublishingFeuertagen (){
 				<div class="modal-footer">
 
 					<button type="submit" name="update_email_options" class="btn btn-primary">Aktualisieren</button>
-					
-					<!-- If user is admin can delete the event -->
-					<?php
-						if ( current_user_can('administrator')) {
-							?>
-							<button type="button"  class="btn btn-danger" data-toggle="modal" data-target="#delete_email_settings_popup"> Löschen </button>
-							<?php
-						}
-						?>
+
 	
 
 				</div>
@@ -292,7 +284,7 @@ function addPublishingFeuertagen (){
 
                         <div class="form-group">
                              <label>Text of the email</label>
-                            <textarea class="form-control"  name='email_text' id='email_text' rows="3"  placeholder="Please write a generic email. This can not be a personalized email for every email list." required ></textarea>
+                            <textarea class="form-control"  name='email_text' id='email_text' rows="3"  placeholder="Please write a generic email. This can not be a personalized email for every email list." ></textarea>
                         </div>
                         <div class="form-group">
                         
@@ -308,6 +300,15 @@ function addPublishingFeuertagen (){
 
 <?php    } ?> 
                        
+<script>
+      tinymce.init({
+        selector: '#email_text',
+        menubar:  false,
+        entity_encoding : "raw"
+      });
+    </script>
+
+
 
 
         <script>
