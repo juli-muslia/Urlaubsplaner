@@ -17,7 +17,7 @@
 function publishingUrlaubs (){
   global $wpdb;
   $table_name = $wpdb->prefix . "publishing_urlaubs";
-  $events = $wpdb->get_results("Select * from $table_name");
+  $events = $wpdb->get_results("Select * from $table_name where validity=1");
 
   $feuertag_table_name = $wpdb->prefix . "publishing_feuertage";
   $feuertagen = $wpdb->get_results("Select * from $feuertag_table_name");

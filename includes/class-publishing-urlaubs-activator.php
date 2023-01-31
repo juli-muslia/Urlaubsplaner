@@ -45,6 +45,7 @@ class Publishing_Urlaubs_Activator {
 			event_start_date date DEFAULT NULL,
 			event_end_date date DEFAULT NULL,
 			color varchar(20) NULL,
+			validity int(1) NOT NULL,
 			t_stamp timestamp,
 			PRIMARY KEY (event_id)
 		  ) ENGINE=InnoDB DEFAULT CHARSET=latin1";

@@ -16,7 +16,7 @@ function insert_event()
      $new_color = sanitize_hex_color($_POST['color']);
 
 
-        $results = $wpdb->query ("INSERT INTO $table_name (event_name, event_start_date, event_end_date, color) values ('$new_name', '$new_start_date', '$new_end_date', '$new_color')");
+        $results = $wpdb->query ("INSERT INTO $table_name (event_name, event_start_date, event_end_date, color,validity) values ('$new_name', '$new_start_date', '$new_end_date', '$new_color',1)");
 
 
         if($results) {
@@ -116,11 +116,11 @@ function delete_event() {
     global $wpdb;
 
     $table_name = $wpdb ->prefix . "publishing_urlaubs";
-
+    $validity = 0;
     if (isset($_POST['deletedata'])){
         $id= sanitize_text_field($_POST['delete_event_id']);
 
-        $query = $wpdb->query("DELETE FROM $table_name WHERE event_id = '$id'");
+        $query = $wpdb->query("UPDATE $table_name SET validity = '$validity'  WHERE event_id = '$id'");
 
     if ($query){
         echo '<div class="alert alert-success text-center" role="alert">
