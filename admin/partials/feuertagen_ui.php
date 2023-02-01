@@ -56,7 +56,7 @@ function addPublishingFeuertagen (){
 
 <!-- ADD HOLIDAYS UI  -->
 <div class='container mt-4'>
-    <h3 class='text-center'>Add Details</h3>
+    <h3 class='text-center'>Add Holidays</h3>
             <div class='row'>
            
                 <div class='col-md-4'>
